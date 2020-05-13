@@ -6,7 +6,9 @@ remove_from_default 'tools/apaka-rock_patches'
 ruby_package 'tools/apaka'
 remove_from_default 'tools/apaka'
 
-cmake_package 'tools/msgpack-c'
+cmake_package 'tools/msgpack-c' do |pkg|
+    pkg.define "MSGPACK_BUILD_TESTS", pkg.test_utility.enabled?
+end
 cmake_package 'tools/pocolog2msgpack'
 
 cmake_package 'gui/osgviz'
@@ -25,3 +27,6 @@ cmake_package 'gui/rock_webapp'
 ruby_package 'tools/rest_api' do |pkg|
     pkg.env_set 'ROCK_WEBAPP', File.join(pkg.prefix, 'share', 'rest_api')
 end
+
+cmake_package "gui/osg_qt4"
+remove_from_default "gui/osg_qt4"
